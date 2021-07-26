@@ -81,13 +81,15 @@ func CreateBudget(month time.Month, max float32) (*Budget, error) {
 		return nil, errDuplicateEntry
 	}
 	newBudget = &Budget{Max: max}
-	report[month]
+	report[month] = newBudget
 	return newBudget, nil
 }
 
 // GetBudget returns budget for given month
 func GetBudget(month time.Month) *Budget {
-
+	if budget, ok := report[month]; ok {
+		return budget
+	}
 	return nil
 }
 
